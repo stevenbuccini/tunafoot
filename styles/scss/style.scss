@@ -1,0 +1,9 @@
+html {
+	
+	.class {
+		color:blue;
+		&:hover {
+			color:green;
+		}
+	}
+}
