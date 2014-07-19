@@ -1,8 +1,0 @@
-/* line 3, ../scss/style.scss */
-html .class {
-  color: blue;
-}
-/* line 5, ../scss/style.scss */
-html .class:hover {
-  color: green;
-}
