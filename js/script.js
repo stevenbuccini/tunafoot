@@ -165,8 +165,16 @@ var questions = [
     "What's the worst superpower?",
     "I ______ being alone",
     "I am ______ the majority of the time",
+    "My worst enemy is:",
+    "The world is:",
+    "Being a child was:",
+    "Better to love or to lose?",
+    "The future of technology:",
+    "Species or individual?",
+    "The feeling of cool linoleum underfoot:",
+    "The act of lying to two people at once:",
+    "What's it like to have friends?"
     ];
-
 
 //set variable for #of questions and responses
 var i=0;
@@ -191,66 +199,41 @@ serverSentences.fetch({
 
 //*var questions = getQuestions(),
 
-    var questions = [
-        "Who are you?",
-        "Where do you come from?",
-        "What's your favorite thing?",
-        "What's the most dangerous thing you own?",
-        "What is the folly of man?",
-        "Where do you go to?",
-        "Where would you rather be right now?",
-        "Where were you most afraid?",
-        "What's the meaning of life?",
-        "What's your spirit celebrity?",
-        "What are aliens like?",
-        "What's the worst superpower?",
-        "I ______ being alone",
-        "I am ______ the majority of the time",
-        "My worst enemy is:",
-        "The world is:",
-        "Being a child was:",
-        "Better to love or to lose?",
-        "The future of technology:",
-        "Species or individual?",
-        "The feeling of cool linoleum underfoot:",
-        "The act of lying to two people at once:",
-        "What's it like to have friends?"
-        ];
 
-        function shuffle(array) {
-          var currentIndex = array.length
-            , temporaryValue
-            , randomIndex
-            ;
+function shuffle(array) {
+  var currentIndex = array.length
+    , temporaryValue
+    , randomIndex
+    ;
 
-          // While there remain elements to shuffle...
-          while (0 !== currentIndex) {
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
 
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
 
-            // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-          }
-          
-          return array;
-        }
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  
+  return array;
+}
 
-        shuffle(questions);
+shuffle(questions);
 
 
-    //set variable for #of questions and responses
-    var i=0;
+//set variable for #of questions and responses
+var i=0;
 
-    //sets question in placeholder prompt
-    $("#text").attr("placeholder", questions[i]);
+//sets question in placeholder prompt
+$("#text").attr("placeholder", questions[i]);
 
-    var value="";
+var value="";
 
-    //*var questions = getQuestions(),
+//*var questions = getQuestions(),
 
 //next question function- next question,resets input on click + enter
 function nextQuestion(){
