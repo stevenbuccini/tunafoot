@@ -25,8 +25,13 @@ function getQuestions() {
   var questionIds = _getRandomNumbersList();
   var questions = [];
   // queryQuestion.equalTo("numId", ;
+  queryQuestion.notEqualTo("numId", "99");
   queryQuestion.find({
     success: function (results) {
+      for (var i = 0; i < results.length; i++) { 
+        var object = results[i];
+        alert(object.get('content'));
+      }
       },
       error: function (error) {
         alert("this should never happen you are fucked.")
