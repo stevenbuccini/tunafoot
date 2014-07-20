@@ -124,7 +124,6 @@ function fetchSentences() {
   });
 }
 
-$(document).ready(function() {
 
     var questions = [
         "Who are you?",
@@ -141,11 +140,7 @@ $(document).ready(function() {
 
     var value="";
 
-    /*var questions = getQuestions(),
-    answers = [],
-    i=0,*/
-
-
+    //*var questions = getQuestions(),
 
 
     //next question function- next question,resets input on click + enter
@@ -168,11 +163,14 @@ $(document).ready(function() {
                 $("input").addClass("sentence-input");
     			$("#text").attr("placeholder", "Write the next sentence using your answers.");
     			$("#text").attr("maxlength", "180");
+
                 // Add listener here becuase class doesn't exist before
                 $('.sentence-input').keyup(debouncedCheckSentence);
-                var keys = [];
-                for(var k in answers) keys.push(k);
-                document.getElementById('wordbank').innerHTML = keys.join(" ");
+                var wordBankHtml = ""
+                for(var k in answers) {
+                    wordBankHtml += '<span id="' + k + '">' + k + '</span>'
+                }
+                document.getElementById('wordbank').innerHTML = wordBankHtml
                 $("#lastsentence").fadeIn();
                 $("#wordbank").fadeIn();
     		} 
@@ -180,9 +178,21 @@ $(document).ready(function() {
     };
 
     //updating value with every keypress
-    $("#text")
- 		.keyup(function() {
-    	value = $(this).val();
+    $("#text").keyup(function() {
+
+            value = $("#text").val();
+            console.log(value);
+
+            if (i>4){
+
+                function wordInString(s, word){
+                    return new RegExp( '\\b' + word + '\\b', 'i').test(s);
+                }
+
+                if (wordInString(value , answers[0])) {alert('fuck');}
+            }   
+
+
   		});
   		
  	//on button click, do next question
@@ -201,4 +211,4 @@ $(document).ready(function() {
 		}
 	});
 
-});
+
