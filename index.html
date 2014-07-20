@@ -2,13 +2,14 @@
 <head>
   <meta charset="utf-8">
 
-  <title>My Parse App</title>
+  <title>Tunafoot</title>
   <meta name="description" content="My Parse App">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" type="text/css" href="styles/css/reset.css"/>
   <link rel="stylesheet" type="text/css" href="styles/css/style.css"/>
   <link href='http://fonts.googleapis.com/css?family=Roboto:400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+  <link rel="shortcut icon" href="tunafoot.ico"  type="image/x-icon"/>
 
   
 </head>
@@ -19,12 +20,15 @@
 
 
     
-  <input id="sentence-input" type="text"></input>
+
+  <p style="display:none;" id="lastsentence">Ralph runs away from the ice cream and towards Hawaii, </p>
+  <p style="display:none;" id="wordbank"></p>
+
           
     <form class="inputs">
 
-        <input type="text" id="text" placeholder="" autofocus maxlength="20" value="" autocomplete="off"/>
-        <input type="button" id="button" value="next"/>
+        <input type="text" id="text" class="sentence-input" placeholder="" autofocus maxlength="20" value="" autocomplete="off"/>
+        <input type="button" id="button" value="Next"/>
 
     </form>
 
