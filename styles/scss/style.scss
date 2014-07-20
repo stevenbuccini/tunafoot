@@ -1,9 +1,58 @@
-html {
+$primary: #37f;
 	
-	.class {
-		color:blue;
-		&:hover {
-			color:green;
-		}
-	}
+.main{
+	width:100vw;
+	overflow-x:hidden;
+	font-family:'Roboto', 'Apercu', sans-serif;
+}
+
+p {
+	color:blue;
+	&:hover {color:red;}
+
+}
+
+.inputs{width:90vw;
+	margin:0 auto 0 auto;
+	background: white;
+	padding-top: 20vh;
+}
+
+input{border: none; 
+	border-bottom: 2px solid #333;
+	width: 100%;
+	font-size: 4vw;
+	margin: 0 auto .2em auto;
+	padding: .5em 0 .2em 0;
+	text-align: center;
+	font-family:'Lora','Roboto', 'Apercu', sans-serif;
+	color:#333;
+	background: white;
+	&:focus {outline:0;}
+}
+
+input[type="button"]{border:none;
+	max-width:40%;margin: .5em 30% 0 30%;
+	transition: color .2s;
+
+	&:hover{color:$primary;
+		transition: color .2s
+	};
+}
+
+
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #ddd;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #ddd;
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #ddd;
+    opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #ddd;
 }

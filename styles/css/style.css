@@ -1,8 +1,80 @@
 /* line 3, ../scss/style.scss */
-html .class {
+.main {
+  width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Roboto', 'Apercu', sans-serif;
+}
+
+/* line 9, ../scss/style.scss */
+p {
   color: blue;
 }
-/* line 5, ../scss/style.scss */
-html .class:hover {
-  color: green;
+/* line 11, ../scss/style.scss */
+p:hover {
+  color: red;
+}
+
+/* line 15, ../scss/style.scss */
+.inputs {
+  width: 90vw;
+  margin: 0 auto 0 auto;
+  background: white;
+  padding-top: 20vh;
+}
+
+/* line 21, ../scss/style.scss */
+input {
+  border: none;
+  border-bottom: 2px solid #333;
+  width: 100%;
+  font-size: 4vw;
+  margin: 0 auto .2em auto;
+  padding: .5em 0 .2em 0;
+  text-align: center;
+  font-family: 'Lora','Roboto', 'Apercu', sans-serif;
+  color: #333;
+  background: white;
+}
+/* line 31, ../scss/style.scss */
+input:focus {
+  outline: 0;
+}
+
+/* line 34, ../scss/style.scss */
+input[type="button"] {
+  border: none;
+  max-width: 40%;
+  margin: .5em 30% 0 30%;
+  transition: color .2s;
+}
+/* line 38, ../scss/style.scss */
+input[type="button"]:hover {
+  color: #3377ff;
+  transition: color 0.2s;
+}
+
+/* line 45, ../scss/style.scss */
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #ddd;
+}
+
+/* line 48, ../scss/style.scss */
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #ddd;
+  opacity: 1;
+}
+
+/* line 52, ../scss/style.scss */
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #ddd;
+  opacity: 1;
+}
+
+/* line 56, ../scss/style.scss */
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #ddd;
 }

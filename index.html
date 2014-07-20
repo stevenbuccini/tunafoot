@@ -5,35 +5,40 @@
   <title>My Parse App</title>
   <meta name="description" content="My Parse App">
   <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="styles/css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="styles/css/style.css"/>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+
   
 </head>
 
 <body>
   
   <div id="main">
-    <h1>You're ready to use Parse!</h1>
 
-    <p>Read the documentation and start building your JavaScript app:</p>
 
-    <ul>
-      <li><a href="https://www.parse.com/docs/js_guide">Parse JavaScript Guide</a></li>
-      <li><a href="https://www.parse.com/docs/js">Parse JavaScript API Documentation</a></li>
-    </ul>
+    
+  <p style="display:none;">Ralph runs away from the ice cream and towards Hawaii, </p>
+          
+    <form class="inputs">
 
-    <div style="display:none" class="error">
-      Looks like there was a problem saving the test object. Make sure you've set your application ID and javascript key correctly in the call to <code>Parse.initialize</code> in this file.
-    </div>
+        <input type="text" id="text" placeholder="" autofocus maxlength="20" value="" autocomplete="off"/>
+        <input type="button" id="button" value="next"/>
 
-    <div style="display:none" class="success">
-      <p>It worked</p>
+    </form>
 
-    </div>
+    <section id="story">
+
+    </section>
   </div>
 
 
 </body>
+
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 
 </html>
