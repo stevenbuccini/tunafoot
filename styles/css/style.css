@@ -31,6 +31,12 @@ p {
 }
 
 /* line 29, ../scss/style.scss */
+#story {
+  width: 100vw;
+  margin: 0 auto 0 auto;
+}
+
+/* line 33, ../scss/style.scss */
 input {
   border: none;
   width: 100%;
@@ -42,45 +48,45 @@ input {
   color: #333;
   background: white;
 }
-/* line 38, ../scss/style.scss */
+/* line 42, ../scss/style.scss */
 input:focus {
   outline: 0;
 }
 
-/* line 41, ../scss/style.scss */
+/* line 45, ../scss/style.scss */
 input[type="button"] {
   border: none;
   max-width: 40%;
   margin: .5em 30% 0 30%;
   transition: color .2s;
 }
-/* line 45, ../scss/style.scss */
+/* line 49, ../scss/style.scss */
 input[type="button"]:hover {
   color: #3377ff;
   transition: color 0.2s;
 }
 
-/* line 52, ../scss/style.scss */
+/* line 56, ../scss/style.scss */
 ::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #ddd;
 }
 
-/* line 55, ../scss/style.scss */
+/* line 59, ../scss/style.scss */
 :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #ddd;
   opacity: 1;
 }
 
-/* line 59, ../scss/style.scss */
+/* line 63, ../scss/style.scss */
 ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #ddd;
   opacity: 1;
 }
 
-/* line 63, ../scss/style.scss */
+/* line 67, ../scss/style.scss */
 :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #ddd;
