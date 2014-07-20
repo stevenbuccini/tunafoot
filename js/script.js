@@ -214,7 +214,6 @@ function fetchSentences() {
                 $("#wordbank").fadeIn();
     		} else if (goodToSave){
                 //triggers following code on enter/click when all is good to save
-                
                 var yourSentence= value;
                 var sentenceObj = new Sentence();
                 sentenceObj.set("text", yourSentence)
@@ -222,7 +221,7 @@ function fetchSentences() {
                 sentenceObj.save(null, {
                   success: function(sentenceObj) {
                     // Execute any logic that should take place after the object is saved.
-                    alert('New object created with objectId: ' + sentenceObj.id);
+                    //alert('New object created with objectId: ' + sentenceObj.id);
                   },
                   error: function(sentenceObj, error) {
                     // Execute any logic that should take place if the save fails.
@@ -230,6 +229,18 @@ function fetchSentences() {
                     alert('Failed to create new object, with error code: ' + error.message);
                   }
                 });
+
+                $("#main").fadeOut(2000);
+                story.push(yourSentence);
+                for(i = 0; i<(story.length); i++){
+                    document.getElementById('story').innerHTML += '<p>' + story[i] + '</p>';
+                    console.log(story[i]);
+                }
+                $("#story").delay(2000).fadeIn(2000);
+                //window.scrollTo(0,document.body.scrollHeight);
+                $("html, body").delay(2000).animate({ scrollTop: $(document).height() }, 3000);
+
+
             }
         }
     };
