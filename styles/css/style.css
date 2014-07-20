@@ -7,7 +7,7 @@
 
 /* line 9, ../scss/style.scss */
 p {
-  width: 100%;
+  width: 90%;
   font-size: 3vw;
   margin: 0 auto .2em auto;
   padding: .5em 0 .2em 0;
@@ -17,26 +17,28 @@ p {
 }
 
 /* line 20, ../scss/style.scss */
-#story {
-  position: absolute;
-  top: 1em;
-}
-
-/* line 23, ../scss/style.scss */
 .inputs {
   width: 90vw;
   margin: 0 auto 0 auto;
   background: white;
-  padding-top: 20vh;
+  padding: 20vh 1em 0 1em;
 }
 
-/* line 29, ../scss/style.scss */
+/* line 26, ../scss/style.scss */
 #story {
-  width: 100vw;
+  width: 90vw;
   margin: 0 auto 0 auto;
+  position: absolute;
+  top: 1em;
 }
 
-/* line 33, ../scss/style.scss */
+/* line 32, ../scss/style.scss */
+span {
+  color: #eee;
+  transition: color .2s;
+}
+
+/* line 35, ../scss/style.scss */
 input {
   border: none;
   width: 100%;
@@ -48,45 +50,45 @@ input {
   color: #333;
   background: white;
 }
-/* line 42, ../scss/style.scss */
+/* line 44, ../scss/style.scss */
 input:focus {
   outline: 0;
 }
 
-/* line 45, ../scss/style.scss */
+/* line 47, ../scss/style.scss */
 input[type="button"] {
   border: none;
   max-width: 40%;
   margin: .5em 30% 0 30%;
   transition: color .2s;
 }
-/* line 49, ../scss/style.scss */
+/* line 51, ../scss/style.scss */
 input[type="button"]:hover {
   color: #3377ff;
   transition: color 0.2s;
 }
 
-/* line 56, ../scss/style.scss */
+/* line 58, ../scss/style.scss */
 ::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #ddd;
 }
 
-/* line 59, ../scss/style.scss */
+/* line 61, ../scss/style.scss */
 :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #ddd;
   opacity: 1;
 }
 
-/* line 63, ../scss/style.scss */
+/* line 65, ../scss/style.scss */
 ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #ddd;
   opacity: 1;
 }
 
-/* line 67, ../scss/style.scss */
+/* line 69, ../scss/style.scss */
 :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #ddd;

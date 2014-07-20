@@ -7,7 +7,7 @@ $primary: #37f;
 }
 
 p {
-	width: 100%;
+	width: 90%;
 	font-size: 3vw;
 	margin: 0 auto .2em auto;
 	padding: .5em 0 .2em 0;
@@ -17,18 +17,20 @@ p {
 
 }
 
-#story{position: absolute;
-	top:1em;}
-
 .inputs{width:90vw;
 	margin:0 auto 0 auto;
 	background: white;
-	padding-top: 20vh;
+	padding: 20vh 1em 0 1em;
 }
 
-#story{width:100vw;
+#story{width:90vw;
 	margin: 0 auto 0 auto;
+	position: absolute;
+	top:1em;
 	}
+
+span{color:#eee;
+	transition: color .2s;}
 
 input{border: none; 
 	width: 100%;
