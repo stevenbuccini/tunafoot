@@ -23,23 +23,26 @@ $( document ).ready(function() {
         if (value.length>0){
         	if (i<4){
     	    	i++;
-    	        console.log(i);
     	        $("#text").attr("placeholder", questions[i]);
-    	        console.log(value);
+    	        console.log(value, i);
     	        answers.push(value);//pushes response to answers array
     	        console.log(answers);
     	        $("#text").attr("value","");
-        	} else if(i=4) {
+        	} else if (i===4) {
                 //fifth one
-                console.log(value);
+                i++,
+                console.log(value, i);
                 answers.push(value);
                 console.log(answers);
                 $("#text").attr("value","");
-    			$("#text").attr("placeholder", "Write the next sentance using your answers.");
-    			$("#text").attr("maxlength", "140");			
-    		} else {
-                //after fifth
-            }
+    			$("#text").attr("placeholder", "Write the next sentence using your answers.");
+    			$("#text").attr("maxlength", "180");
+                //$("#wordbank").text(answers[0] answers[1] answers[2] answers[3] answers[4]);
+                document.getElementById('wordbank').innerHTML = answers[0] answers[1] answers[2] answers[3] answers[4];
+                $("#lastsentence").fadeIn();
+                $("#wordbank").fadeIn();
+
+    		} 
         }
     };
 
@@ -52,6 +55,7 @@ $( document ).ready(function() {
  	//on button click, do next question
     $('#button').click(function(){   
     	nextQuestion();
+
     });
 
     //on enter keypress, do the same shit as button click
