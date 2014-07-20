@@ -1,21 +1,14 @@
-$( document ).ready(function() {
 
-    var questions = [
-    	"Who are you?",
-   		"Where do you come from and why?",
-    	"What's your favorite thing?",
-    	"What's the most dangerous thing you own?",
-    	"What is the folly of man?"];
 
-    var answers = [];
-
-    //set variable for #of questions and responses
-    var i=0;
+    var questions = getQuestions(),
+    answers = [],
+    i=0,
+    value="";
 
     //sets question in placeholder prompt
     $("#text").attr("placeholder", questions[i]);
 
-    var value="";
+
 
 
     //next question function- next question,resets input on click + enter
@@ -23,14 +16,14 @@ $( document ).ready(function() {
     	if (i<=3){
 	    	i++;
 	        console.log(i);
-	        $("#text").attr("placeholder", questions[i]);
+	        $("#text").attr("placeholder", questions()[i]);
 	        console.log(value);
 	        answers.push(value);//pushes response to answers array
 	        console.log(answers);
 	        $("#text").attr("value","");
     	} else {
     		//once the first 5 are done
-			$("#text").attr("placeholder", "Write the next sentance using your answers.");
+			$("#text").attr("placeholder", "Write the next sentence using your answers.");
 			$("#text").attr("maxlength", "140");
 			
 
@@ -74,4 +67,3 @@ $( document ).ready(function() {
 
 
 
-});
