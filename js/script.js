@@ -37,8 +37,7 @@ $( document ).ready(function() {
                 $("#text").attr("value","");
     			$("#text").attr("placeholder", "Write the next sentence using your answers.");
     			$("#text").attr("maxlength", "180");
-                //$("#wordbank").text(answers[0] answers[1] answers[2] answers[3] answers[4]);
-                document.getElementById('wordbank').innerHTML = answers[0] answers[1] answers[2] answers[3] answers[4];
+                document.getElementById('wordbank').innerHTML = answers.join(" ");
                 $("#lastsentence").fadeIn();
                 $("#wordbank").fadeIn();
 
