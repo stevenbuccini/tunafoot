@@ -17,6 +17,7 @@ var SentenceCollection = Parse.Collection.extend({
 
 var TOTAL_QUESTIONS = 7;
 var QUESTIONS_PER_USER = 5;
+var answers = {};
 
 function _getRandomNumbersList() {
   var arr = []
@@ -60,8 +61,27 @@ function getQuestions() {
   return function() { return questions};
 }
 
+function checkSentenceForRequiredWords() {
+    var el = this;
+    var input = $(el).val().split(" ");
+    if (answers.length === 0){
+        console.log('all answers present');
+    }
+    for (var i = 0; i < input.length; i++) {
+        for (var j = 0; j < answers.length; j++){
+            if (input[i] === answers[j]) {
+                answers.splice(j , 1)
+                return;
+            }
+        }
+    }
+}
 
-$('.sentence-input').keypress(function() {
+var debouncedCheckSentence = _.debounce(checkSentenceForRequiredWords, 300);
+
+
+
+    /*function() {
   //var answers = ["dog","blue"];
     var el = this;
     if (this.timeoutId)
@@ -72,7 +92,7 @@ $('.sentence-input').keypress(function() {
         alert("Got the words!");
       }
     }, 200);
-});
+}); */
 
 function isValidNewSentence(answers, input) {
   var total=0;
@@ -116,8 +136,6 @@ $(document).ready(function() {
         "What's the most dangerous thing you own?",
         "What is the folly of man?"];
 
-    var answers = [];
-
     //set variable for #of questions and responses
     var i=0;
 
@@ -140,20 +158,24 @@ $(document).ready(function() {
     	    	i++;
     	        $("#text").attr("placeholder", questions[i]);
     	        console.log(value, i);
-    	        answers.push(value);//pushes response to answers array
+    	        answers[value] = false;//pushes response to answers array
     	        console.log(answers);
     	        $("#text").attr("value","");
         	} else if (i===4) {
                 //fifth one
                 i++,
                 console.log(value, i);
-                answers.push(value);
+                answers[value] = false;
                 console.log(answers);
                 $("#text").attr("value","");
                 $("input").addClass("sentence-input");
     			$("#text").attr("placeholder", "Write the next sentence using your answers.");
     			$("#text").attr("maxlength", "180");
-                document.getElementById('wordbank').innerHTML = answers.join(" ");
+                // Add listener here becuase class doesn't exist before
+                $('.sentence-input').keyup(debouncedCheckSentence);
+                var keys = [];
+                for(var k in answers) keys.push(k);
+                document.getElementById('wordbank').innerHTML = keys.join(" ");
                 $("#lastsentence").fadeIn();
                 $("#wordbank").fadeIn();
     		} 
