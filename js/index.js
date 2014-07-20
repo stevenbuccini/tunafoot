@@ -4,6 +4,11 @@ var Sentence = Parse.Object.extend("Sentence");
 var Question = Parse.Object.extend("Question");
 var queryQuestion = new Parse.Query(Question);
 var querySentence = new Parse.Query(Sentence);
+var SentenceCollection = Parse.Collection.extend({
+  model: Sentence,
+  query: (new Parse.Query(Sentence)).ascending("createdAt")
+});
+
 
 //////////////////////////////////////////
 // VARIABLES AND FUNCTION DECLARATIONS ///
@@ -47,6 +52,26 @@ function init() {
   var questions = getQuestions();
   console.log(questions);
   
+}
+
+/*
+ *  Returns a list of Strings representing sentences, with the oldest sentence in index 0.
+ *  Leverages the Parse Collection object.
+ */
+function fetchSentences() {
+  var collection = new SentenceCollection();
+  collection.fetch({
+    success: function(collection) {
+      sentences = []
+      for (i = 0, len = collection.models.length; i < len; i++) {
+        sentences.push(collection.models[i].attributes.text);
+      }
+      return sentences
+    },
+    error: function(collection, error) {
+      alert("There was an error retrieving the surprise. Please refresh the page and try again.")
+    }
+  });
 }
 
 
