@@ -2,7 +2,11 @@
 Parse.initialize("ZvuYGWmttHsaBJ0UDvxK76s7cstAwNRzh4SYDDLV", "KmJ694MObD0g26KVUyF2L8esD1MwTR76hMWJhfUA");
 
 var Sentence = Parse.Object.extend("Sentence");
-var Question = Parse.Object.extend("Question");
+var Question = Parse.Object.extend("Question", {
+    initialize: function(sentence) {
+        this.text = sentence
+    }    
+});
 var queryQuestion = new Parse.Query(Question);
 var querySentence = new Parse.Query(Sentence);
 var SentenceCollection = Parse.Collection.extend({
@@ -24,6 +28,7 @@ var yourSentence = "";
 //dummy story content
 var story = ["Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
 "Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse.",
+<<<<<<< Updated upstream
 "Per inani putent ne, expetenda pertinacia vituperata ei cum.",
 "Per inani putent ne, expetenda pertinacia vituperata ei cum.",
 "Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
@@ -32,6 +37,9 @@ var story = ["Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu vide
 "Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
 "Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse.",
 "Per inani putent ne, expetenda pertinacia vituperata ei cum.",];
+=======
+"Per inani putent ne, expetenda pertinacia vituperata ei cum."];
+>>>>>>> Stashed changes
 
 function _getRandomNumbersList() {
   var arr = []
@@ -75,11 +83,16 @@ function getQuestions() {
   return function() { return questions};
 }
 
+function allTrue(answers){
+    for(var word in answers) {
+        if(!answers[word]) return false;
+    }
+    return true;
+}
+
 function checkSentenceForRequiredWords() {
     var el = this;
     var input = $(el).val().split(" ");
-    var answers_definitive = [];
-    //console.log("answers", answers)
     for (var k in answers) {
         answers[k] = false;
         for (var i = 0; i < input.length; i++) {
@@ -88,21 +101,13 @@ function checkSentenceForRequiredWords() {
             } 
         }
     }
-
-    console.log('answ', answers)
     // At this point, answers will have the correct values for each word
     for (var word in answers) {
-        if (answers[word]){console.log(word + answers);
+        if (answers[word]) {
             $("#" + word).css("color", "#0f0");
         } else {
             $("#" + word).css("color", "#333");
         }
-    }
-
-    function allTrue(answers){
-        for(var word in answers)
-        if(!answers[word]) return false;
-        return true;
     }
 
     if (allTrue(answers)){
@@ -188,6 +193,7 @@ function fetchSentences() {
 
     //next question function- next question,resets input on click + enter
     function nextQuestion(){
+        var el = this;
         if (value.length>0){
         	if (i<4){
     	    	i++;
@@ -223,12 +229,11 @@ function fetchSentences() {
                 
                 console.log(value);
                 var yourSentence= value;
+                var sentenceObj = new Sentence(yourSentence);
                 console.log(yourSentence);
-                alert(yourSentence);
+                console.log(sentenceObj);
                 $("#main").fadeOut("slow");
                 $("#story").fadeIn();
-
-
             }
         }
     };
