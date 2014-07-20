@@ -64,15 +64,12 @@ function getQuestions() {
 function checkSentenceForRequiredWords() {
     var el = this;
     var input = $(el).val().split(" ");
-    if (answers.length === 0){
-        console.log('all answers present');
-    }
+    // Two nested for loops. One to check dictionary state and other to recolor text.
     for (var i = 0; i < input.length; i++) {
-        for (var j = 0; j < answers.length; j++){
-            if (input[i] === answers[j]) {
-                answers.splice(j , 1)
-                return;
-            }
+        var word = input[i];
+        // Probably can just do answers[word]
+        if (answers[word] === false) {
+            answers[word] = true;
         }
     }
 }
