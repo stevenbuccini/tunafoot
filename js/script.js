@@ -74,8 +74,32 @@ function checkSentenceForRequiredWords() {
             } 
         }
     }
+
     console.log('answ', answers)
+    // At this point, answers will have the correct values for each word
+    for (var word in answers) {
+        if (answers[word]){console.log(word + answers);
+            $("#" + word).css("color", "#0f0");
+        } else {
+            $("#" + word).css("color", "#333");
+        }
+    }
+
+    function allTrue(answers){
+        for(var word in answers)
+        if(!answers[word]) return false;
+        return true;
+    }
+
+    if (allTrue(answers)){
+        console.log("all are true, go ahead");
+    }
+    
 }
+
+
+
+
 
 var debouncedCheckSentence = _.debounce(checkSentenceForRequiredWords, 300);
 
@@ -111,6 +135,7 @@ function isValidNewSentence(answers, input) {
  *  Returns a list of Strings representing sentences, with the oldest sentence in index 0.
  *  Leverages the Parse Collection object.
  */
+
 function fetchSentences() {
   var collection = new SentenceCollection();
   collection.fetch({
@@ -153,7 +178,7 @@ function fetchSentences() {
     	    	i++;
     	        $("#text").attr("placeholder", questions[i]);
     	        console.log(value, i);
-    	        answers[value] = false;//pushes response to answers array
+                answers[value] = false;//pushes response to answers array
     	        console.log(answers);
     	        $("#text").attr("value","");
         	} else if (i===4) {
@@ -171,9 +196,16 @@ function fetchSentences() {
                 $('.sentence-input').keyup(debouncedCheckSentence);
                 var wordBankHtml = ""
                 for(var k in answers) {
-                    wordBankHtml += '<span id="' + k + '">' + k + '</span>'
+                    wordBankHtml += '<span id="' + k + '">' + k  + '&nbsp;</span>'
+
+
                 }
-                document.getElementById('wordbank').innerHTML = wordBankHtml
+
+                
+
+
+                document.getElementById('wordbank').innerHTML = wordBankHtml;
+
                 $("#lastsentence").fadeIn();
                 $("#wordbank").fadeIn();
     		} 
@@ -192,10 +224,9 @@ function fetchSentences() {
                     return new RegExp( '\\b' + word + '\\b', 'i').test(s);
                 }
 
-                if (wordInString(value , answers[0])) {alert('fuck');}
+                //if (wordInString(value , answers[0])) {alert('fuck');}
+
             }   
-
-
   		});
   		
  	//on button click, do next question
