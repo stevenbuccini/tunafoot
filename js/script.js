@@ -31,7 +31,7 @@ var story = ["Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu vide
 "Per inani putent ne, expetenda pertinacia vituperata ei cum.",
 "Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
 "Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse.",
-"Per inani putent ne, expetenda pertinacia vituperata ei cum.",];
+"Per inani puHEHEHEHEtent ne, expetenda pertinacia vituperata ei cum.",];
 
 function _getRandomNumbersList() {
   var arr = []
@@ -194,6 +194,9 @@ function fetchSentences() {
     	        $("#text").attr("value","");
         	} else if (i===4) {
                 //fifth one
+                var a = story.length;
+                console.log("Second To Last" + story[a-1] + a);
+                document.getElementById('lastsentence').innerHTML = story[a-1];
                 i++,
                 answers[value.toLowerCase()] = false;
                 $("#text").attr("value","");
