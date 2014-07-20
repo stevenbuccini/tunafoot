@@ -167,16 +167,27 @@ function fetchSentences() {
 
     var questions = [
         "Who are you?",
-        "Where do you come from and why?",
+        "Where do you come from?",
         "What's your favorite thing?",
         "What's the most dangerous thing you own?",
-        "What is the folly of man?"];
+        "What is the folly of man?",
+        "Where do you go to?",
+        "Where would you rather be right now?",
+        "Where were you most afraid?",
+        "What's the meaning of life?",
+        "What's your spirit celebrity?",
+        "What are aliens like?",
+        "What's the worst superpower?",
+        "I ______ being alone",
+        "I am ______ the majority of the time",
+        ];
+
 
     //set variable for #of questions and responses
     var i=0;
 
     //sets question in placeholder prompt
-    $("#text").attr("placeholder", questions[i]);
+    $("#text").attr("placeholder", questions[Math.floor(0 + Math.random() * (questions.length))]);
 
     var value="";
 
@@ -201,7 +212,7 @@ function fetchSentences() {
                 answers[value.toLowerCase()] = false;
                 $("#text").attr("value","");
                 $("input").addClass("sentence-input");
-    			$("#text").attr("placeholder", "Write the next sentence using your answers.");
+    			$("#text").attr("placeholder", "Respond using your responses.");
     			$("#text").attr("maxlength", "180");
 
                 // Add listener here becuase class doesn't exist before
