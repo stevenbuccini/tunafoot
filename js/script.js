@@ -19,11 +19,19 @@ var TOTAL_QUESTIONS = 7;
 var QUESTIONS_PER_USER = 5;
 var answers = {};
 var goodToSave = false;
+var yourSentence = "";
 
 //dummy story content
-var story = ["Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per."
-"Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse."
-"Per inani putent ne, expetenda pertinacia vituperata ei cum."];
+var story = ["Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
+"Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse.",
+"Per inani putent ne, expetenda pertinacia vituperata ei cum.",
+"Per inani putent ne, expetenda pertinacia vituperata ei cum.",
+"Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
+"Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse.",
+"Per inani putent ne, expetenda pertinacia vituperata ei cum.",
+"Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
+"Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse.",
+"Per inani putent ne, expetenda pertinacia vituperata ei cum.",];
 
 function _getRandomNumbersList() {
   var arr = []
@@ -212,7 +220,14 @@ function fetchSentences() {
                 $("#wordbank").fadeIn();
     		} else if (goodToSave){
                 //triggers following code on enter/click when all is good to save
-                alert('whooooooo');
+                
+                console.log(value);
+                var yourSentence= value;
+                console.log(yourSentence);
+                alert(yourSentence);
+                $("#main").fadeOut("slow");
+                $("#story").fadeIn();
+
 
             }
         }
