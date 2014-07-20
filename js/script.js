@@ -87,7 +87,7 @@ function allTrue(answers){
 
 function checkSentenceForRequiredWords() {
     var el = this;
-    var input = $(el).val().toLowerCase().split(" ");
+    var input = $(el).val().trim().toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(" ");
     for (var k in answers) {
         answers[k] = false;
         for (var i = 0; i < input.length; i++) {
@@ -113,25 +113,8 @@ function checkSentenceForRequiredWords() {
 }
 
 
-
-
-
 var debouncedCheckSentence = _.debounce(checkSentenceForRequiredWords, 300);
 
-
-
-    /*function() {
-  //var answers = ["dog","blue"];
-    var el = this;
-    if (this.timeoutId)
-        window.clearTimeout(this.timeoutId);
-    this.timeoutId = window.setTimeout(function () {
-      var input = $(el).val().split(" ");
-      if (isValidNewSentence(answers, input)) {
-        alert("Got the words!");
-      }
-    }, 200);
-}); */
 
 function isValidNewSentence(answers, input) {
   var total=0;
@@ -150,7 +133,6 @@ function isValidNewSentence(answers, input) {
  *  Returns a list of Strings representing sentences, with the oldest sentence in index 0.
  *  Leverages the Parse Collection object.
  */
-
 function fetchSentences() {
   var collection = new SentenceCollection();
   collection.fetch({
@@ -247,7 +229,7 @@ function nextQuestion(){
     	if (i<4){
 	    	i++;
 	        $("#text").attr("placeholder", questions[i]);
-            answers[value.toLowerCase()] = false;//pushes response to answers array
+            answers[value.trim().toLowerCase()] = false;//pushes response to answers array
 	        $("#text").attr("value","");
     	} else if (i===4) {
             //fifth one
@@ -255,7 +237,7 @@ function nextQuestion(){
             console.log("Second To Last" + story[a-1] + a);
             document.getElementById('lastsentence').innerHTML = story[a-1];
             i++,
-            answers[value.toLowerCase()] = false;
+            answers[value.trim().toLowerCase()] = false;
             $("#text").attr("value","");
             $("input").addClass("sentence-input");
 			$("#text").attr("placeholder", "Respond using your responses.");
