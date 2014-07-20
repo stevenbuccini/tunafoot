@@ -18,6 +18,12 @@ var SentenceCollection = Parse.Collection.extend({
 var TOTAL_QUESTIONS = 7;
 var QUESTIONS_PER_USER = 5;
 var answers = {};
+var goodToSave = false;
+
+//dummy story content
+var story = ["Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per."
+"Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse."
+"Per inani putent ne, expetenda pertinacia vituperata ei cum."];
 
 function _getRandomNumbersList() {
   var arr = []
@@ -93,6 +99,7 @@ function checkSentenceForRequiredWords() {
 
     if (allTrue(answers)){
         console.log("all are true, go ahead");
+        goodToSave = true;
     }
     
 }
@@ -197,18 +204,17 @@ function fetchSentences() {
                 var wordBankHtml = ""
                 for(var k in answers) {
                     wordBankHtml += '<span id="' + k + '">' + k  + '&nbsp;</span>'
-
-
-                }
-
-                
-
+                }   
 
                 document.getElementById('wordbank').innerHTML = wordBankHtml;
 
                 $("#lastsentence").fadeIn();
                 $("#wordbank").fadeIn();
-    		} 
+    		} else if (goodToSave){
+                //triggers following code on enter/click when all is good to save
+                alert('whooooooo');
+
+            }
         }
     };
 
