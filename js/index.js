@@ -56,7 +56,7 @@ function getQuestions() {
 }
 
 
-$('#sentence-input').keypress(function() {
+$('.sentence-input').keypress(function() {
   var answers = ["dog","blue"];
     var el = this;
     if (this.timeoutId)
