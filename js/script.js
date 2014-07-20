@@ -64,14 +64,17 @@ function getQuestions() {
 function checkSentenceForRequiredWords() {
     var el = this;
     var input = $(el).val().split(" ");
-    // Two nested for loops. One to check dictionary state and other to recolor text.
-    for (var i = 0; i < input.length; i++) {
-        var word = input[i];
-        // Probably can just do answers[word]
-        if (answers[word] === false) {
-            answers[word] = true;
+    var answers_definitive = [];
+    //console.log("answers", answers)
+    for (var k in answers) {
+        answers[k] = false;
+        for (var i = 0; i < input.length; i++) {
+            if (input[i] === k) {
+                answers[k] = true;
+            } 
         }
     }
+    console.log('answ', answers)
 }
 
 var debouncedCheckSentence = _.debounce(checkSentenceForRequiredWords, 300);
@@ -181,7 +184,7 @@ function fetchSentences() {
     $("#text").keyup(function() {
 
             value = $("#text").val();
-            console.log(value);
+            //console.log(value);
 
             if (i>4){
 
