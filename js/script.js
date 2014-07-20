@@ -84,7 +84,7 @@ function allTrue(answers){
 
 function checkSentenceForRequiredWords() {
     var el = this;
-    var input = $(el).val().split(" ");
+    var input = $(el).val().toLowerCase().split(" ");
     for (var k in answers) {
         answers[k] = false;
         for (var i = 0; i < input.length; i++) {
@@ -190,16 +190,12 @@ function fetchSentences() {
         	if (i<4){
     	    	i++;
     	        $("#text").attr("placeholder", questions[i]);
-    	        console.log(value, i);
-                answers[value] = false;//pushes response to answers array
-    	        console.log(answers);
+                answers[value.toLowerCase()] = false;//pushes response to answers array
     	        $("#text").attr("value","");
         	} else if (i===4) {
                 //fifth one
                 i++,
-                console.log(value, i);
-                answers[value] = false;
-                console.log(answers);
+                answers[value.toLowerCase()] = false;
                 $("#text").attr("value","");
                 $("input").addClass("sentence-input");
     			$("#text").attr("placeholder", "Write the next sentence using your answers.");
@@ -219,7 +215,6 @@ function fetchSentences() {
     		} else if (goodToSave){
                 //triggers following code on enter/click when all is good to save
                 
-                console.log(value);
                 var yourSentence= value;
                 var sentenceObj = new Sentence();
                 sentenceObj.set("text", yourSentence)
