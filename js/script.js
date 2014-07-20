@@ -20,8 +20,10 @@ var QUESTIONS_PER_USER = 5;
 var answers = {};
 var goodToSave = false;
 var yourSentence = "";
+var story =[];
 
 //dummy story content
+/*
 var story = ["Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
 "Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse.",
 "Per inani putent ne, expetenda pertinacia vituperata ei cum.",
@@ -32,6 +34,7 @@ var story = ["Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu vide
 "Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
 "Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse.",
 "Per inani puHEHEHEHEtent ne, expetenda pertinacia vituperata ei cum.",];
+*/
 
 function _getRandomNumbersList() {
   var arr = []
@@ -165,131 +168,144 @@ function fetchSentences() {
 }
 
 
-    var questions = [
-        "Who are you?",
-        "Where do you come from?",
-        "What's your favorite thing?",
-        "What's the most dangerous thing you own?",
-        "What is the folly of man?",
-        "Where do you go to?",
-        "Where would you rather be right now?",
-        "Where were you most afraid?",
-        "What's the meaning of life?",
-        "What's your spirit celebrity?",
-        "What are aliens like?",
-        "What's the worst superpower?",
-        "I ______ being alone",
-        "I am ______ the majority of the time",
-        ];
+var questions = [
+    "Who are you?",
+    "Where do you come from?",
+    "What's your favorite thing?",
+    "What's the most dangerous thing you own?",
+    "What is the folly of man?",
+    "Where do you go to?",
+    "Where would you rather be right now?",
+    "Where were you most afraid?",
+    "What's the meaning of life?",
+    "What's your spirit celebrity?",
+    "What are aliens like?",
+    "What's the worst superpower?",
+    "I ______ being alone",
+    "I am ______ the majority of the time",
+    ];
 
 
-    //set variable for #of questions and responses
-    var i=0;
+//set variable for #of questions and responses
+var i=0;
 
-    //sets question in placeholder prompt
-    $("#text").attr("placeholder", questions[Math.floor(0 + Math.random() * (questions.length))]);
+//sets question in placeholder prompt
+$("#text").attr("placeholder", questions[Math.floor(0 + Math.random() * (questions.length))]);
 
-    var value="";
+var value="";
 
-    //*var questions = getQuestions(),
+var serverSentences = new SentenceCollection();
+serverSentences.fetch({
+  success: function(collection) {
+    console.log(collection)
+    for (var i = 0; i < collection.models.length; i++) {
+        story.push(collection.models[i].attributes.text)
+    }
+  },
+  error: function(collection, error) {
+    alert("Cannot load the surprise. Please try again.")
+  }
+});
 
-
-    //next question function- next question,resets input on click + enter
-    function nextQuestion(){
-        var el = this;
-        if (value.length>0){
-        	if (i<4){
-    	    	i++;
-    	        $("#text").attr("placeholder", questions[i]);
-                answers[value.toLowerCase()] = false;//pushes response to answers array
-    	        $("#text").attr("value","");
-        	} else if (i===4) {
-                //fifth one
-                var a = story.length;
-                console.log("Second To Last" + story[a-1] + a);
-                document.getElementById('lastsentence').innerHTML = story[a-1];
-                i++,
-                answers[value.toLowerCase()] = false;
-                $("#text").attr("value","");
-                $("input").addClass("sentence-input");
-    			$("#text").attr("placeholder", "Respond using your responses.");
-    			$("#text").attr("maxlength", "180");
-
-                // Add listener here becuase class doesn't exist before
-                $('.sentence-input').keyup(debouncedCheckSentence);
-                var wordBankHtml = ""
-                for(var k in answers) {
-                    wordBankHtml += '<span id="' + k + '">' + k  + '&nbsp;</span>'
-                }   
-
-                document.getElementById('wordbank').innerHTML = wordBankHtml;
-
-                $("#lastsentence").fadeIn();
-                $("#wordbank").fadeIn();
-    		} else if (goodToSave){
-                //triggers following code on enter/click when all is good to save
-                var yourSentence= value;
-                var sentenceObj = new Sentence();
-                sentenceObj.set("text", yourSentence)
-                console.log(yourSentence);
-                sentenceObj.save(null, {
-                  success: function(sentenceObj) {
-                    // Execute any logic that should take place after the object is saved.
-                    //alert('New object created with objectId: ' + sentenceObj.id);
-                  },
-                  error: function(sentenceObj, error) {
-                    // Execute any logic that should take place if the save fails.
-                    // error is a Parse.Error with an error code and description.
-                    alert('Failed to create new object, with error code: ' + error.message);
-                  }
-                });
-
-                $("#main").fadeOut(2000);
-                story.push(yourSentence);
-                for(i = 0; i<(story.length); i++){
-                    document.getElementById('story').innerHTML += '<p>' + story[i] + '</p>';
-                    console.log(story[i]);
-                }
-                $("#story").delay(2000).fadeIn(2000);
-                //window.scrollTo(0,document.body.scrollHeight);
-                $("html, body").delay(2000).animate({ scrollTop: $(document).height() }, 3000);
+//*var questions = getQuestions(),
 
 
-            }
-        }
-    };
+//next question function- next question,resets input on click + enter
+function nextQuestion(){
+    var el = this;
+    if (value.length>0){
+    	if (i<4){
+	    	i++;
+	        $("#text").attr("placeholder", questions[i]);
+            answers[value.toLowerCase()] = false;//pushes response to answers array
+	        $("#text").attr("value","");
+    	} else if (i===4) {
+            //fifth one
+            var a = story.length;
+            console.log("Second To Last" + story[a-1] + a);
+            document.getElementById('lastsentence').innerHTML = story[a-1];
+            i++,
+            answers[value.toLowerCase()] = false;
+            $("#text").attr("value","");
+            $("input").addClass("sentence-input");
+			$("#text").attr("placeholder", "Respond using your responses.");
+			$("#text").attr("maxlength", "180");
 
-    //updating value with every keypress
-    $("#text").keyup(function() {
-
-            value = $("#text").val();
-            //console.log(value);
-
-            if (i>4){
-
-                function wordInString(s, word){
-                    return new RegExp( '\\b' + word + '\\b', 'i').test(s);
-                }
-
-                //if (wordInString(value , answers[0])) {alert('fuck');}
-
+            // Add listener here becuase class doesn't exist before
+            $('.sentence-input').keyup(debouncedCheckSentence);
+            var wordBankHtml = ""
+            for(var k in answers) {
+                wordBankHtml += '<span id="' + k + '">' + k  + '&nbsp;</span>'
             }   
-  		});
-  		
- 	//on button click, do next question
-    $('#button').click(function(){   
-    	nextQuestion();
 
-    });
+            document.getElementById('wordbank').innerHTML = wordBankHtml;
 
-    //on enter keypress, do the same shit as button click
-	$(document).keypress(function(event){
-		var keycode = (event.keyCode ? event.keyCode : event.which);
-		if(keycode == '13'){
-			//do this code when enter is pressed, first line prevents page refresh
-			event.preventDefault();
-			nextQuestion();	
-		}
-	});
+            $("#lastsentence").fadeIn();
+            $("#wordbank").fadeIn();
+		} else if (goodToSave){
+            //triggers following code on enter/click when all is good to save
+            var yourSentence= value;
+            var sentenceObj = new Sentence();
+            sentenceObj.set("text", yourSentence)
+            console.log(yourSentence);
+            sentenceObj.save(null, {
+              success: function(sentenceObj) {
+                // Execute any logic that should take place after the object is saved.
+                //alert('New object created with objectId: ' + sentenceObj.id);
+              },
+              error: function(sentenceObj, error) {
+                // Execute any logic that should take place if the save fails.
+                // error is a Parse.Error with an error code and description.
+                alert('Failed to create new object, with error code: ' + error.message);
+              }
+            });
+
+            $("#main").fadeOut(2000);
+            story.push(yourSentence);
+            for(i = 0; i<(story.length); i++){
+                document.getElementById('story').innerHTML += '<p>' + story[i] + '</p>';
+                console.log(story[i]);
+            }
+            $("#story").delay(2000).fadeIn(2000);
+            //window.scrollTo(0,document.body.scrollHeight);
+            $("html, body").delay(2000).animate({ scrollTop: $(document).height() }, 3000);
+
+
+        }
+    }
+};
+
+//updating value with every keypress
+$("#text").keyup(function() {
+
+        value = $("#text").val();
+        //console.log(value);
+
+        if (i>4){
+
+            function wordInString(s, word){
+                return new RegExp( '\\b' + word + '\\b', 'i').test(s);
+            }
+
+            //if (wordInString(value , answers[0])) {alert('fuck');}
+
+        }   
+		});
+		
+	//on button click, do next question
+$('#button').click(function(){   
+	nextQuestion();
+
+});
+
+//on enter keypress, do the same shit as button click
+$(document).keypress(function(event){
+	var keycode = (event.keyCode ? event.keyCode : event.which);
+	if(keycode == '13'){
+		//do this code when enter is pressed, first line prevents page refresh
+		event.preventDefault();
+		nextQuestion();	
+	}
+});
 
 
