@@ -2,11 +2,7 @@
 Parse.initialize("ZvuYGWmttHsaBJ0UDvxK76s7cstAwNRzh4SYDDLV", "KmJ694MObD0g26KVUyF2L8esD1MwTR76hMWJhfUA");
 
 var Sentence = Parse.Object.extend("Sentence");
-var Question = Parse.Object.extend("Question", {
-    initialize: function(sentence) {
-        this.text = sentence
-    }    
-});
+var Question = Parse.Object.extend("Question");
 var queryQuestion = new Parse.Query(Question);
 var querySentence = new Parse.Query(Sentence);
 var SentenceCollection = Parse.Collection.extend({
@@ -28,7 +24,6 @@ var yourSentence = "";
 //dummy story content
 var story = ["Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
 "Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse.",
-<<<<<<< Updated upstream
 "Per inani putent ne, expetenda pertinacia vituperata ei cum.",
 "Per inani putent ne, expetenda pertinacia vituperata ei cum.",
 "Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
@@ -37,9 +32,6 @@ var story = ["Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu vide
 "Lorem ipsum dolor sit amet, usu in sint blandit aliquando, eu viderer dolorem mnesarchum per.",
 "Veri deleniti ad quo, at quo dico tamquam, per te quas mutat deseruisse.",
 "Per inani putent ne, expetenda pertinacia vituperata ei cum.",];
-=======
-"Per inani putent ne, expetenda pertinacia vituperata ei cum."];
->>>>>>> Stashed changes
 
 function _getRandomNumbersList() {
   var arr = []
@@ -229,11 +221,20 @@ function fetchSentences() {
                 
                 console.log(value);
                 var yourSentence= value;
-                var sentenceObj = new Sentence(yourSentence);
+                var sentenceObj = new Sentence();
+                sentenceObj.set("text", yourSentence)
                 console.log(yourSentence);
-                console.log(sentenceObj);
-                $("#main").fadeOut("slow");
-                $("#story").fadeIn();
+                sentenceObj.save(null, {
+                  success: function(sentenceObj) {
+                    // Execute any logic that should take place after the object is saved.
+                    alert('New object created with objectId: ' + sentenceObj.id);
+                  },
+                  error: function(sentenceObj, error) {
+                    // Execute any logic that should take place if the save fails.
+                    // error is a Parse.Error with an error code and description.
+                    alert('Failed to create new object, with error code: ' + error.message);
+                  }
+                });
             }
         }
     };
